@@ -36,6 +36,8 @@ public sealed class Battle : IGameState
     public void Update(GameTime time)
     {
         float dt = (float)time.ElapsedGameTime.TotalSeconds;
+        for (int i = 0; i < Consts.SubStep; i++)
+            NewtonianPhysicSystem.Update(World, dt / Consts.SubStep);
     }
 
     public void Draw()
