@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RatasInit.GameStates;
 using RatasInit.Managers;
 
 namespace RatasInit;
@@ -8,6 +9,7 @@ namespace RatasInit;
 public class Main : Game
 {
     private GraphicsDeviceManager _graphics;
+    private IGameState _gameState;
 
     public Main()
     {
@@ -35,10 +37,12 @@ public class Main : Game
     protected override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        _gameState.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
+        _gameState.Draw();
         ScreenManager.DrawToBackBuffer();
 
         base.Draw(gameTime);
