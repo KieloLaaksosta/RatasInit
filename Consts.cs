@@ -7,5 +7,8 @@ public static class Consts
 
     public const int SubStep = 4;
 
+    public const float G = 1f;
+
     public static readonly Rectangle WorldRect = new(0, 0, WorldDrawSize, WorldDrawSize);
+    public static readonly Vector2 WorldCentre = new(WorldDrawSize / 2, WorldDrawSize / 2);
 }

@@ -26,3 +26,5 @@ public record struct CMass
         InvMass = mass != 0 ? 1f / mass : 0f;
     }
 }
+
+public record struct CGravitySource();

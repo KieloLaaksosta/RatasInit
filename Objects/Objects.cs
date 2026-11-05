@@ -21,4 +21,18 @@ public static class Objects
         );
         return entity;
     }
+
+    public static Entity CreateStaticPlanet(World world, SpriteBatch batch, float mass)
+    {
+        var entity = world.Create(
+            new CPosition(Consts.WorldCentre),
+            new CMass(mass),
+
+            new CGravitySource(),
+
+            new CBatch(batch, 0f),
+            new CSprite(AssetManager.Pixel, new Rectangle(0, 0, 1, 1), Color.Red)
+        );
+        return entity;
+    }
 }

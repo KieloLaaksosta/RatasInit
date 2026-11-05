@@ -30,14 +30,18 @@ public sealed class Battle : IGameState
         _gameWorldBatch = new SpriteBatch(gd);
         _gameWorld = new RenderTarget2D(gd, Consts.WorldDrawSize, Consts.WorldDrawSize);
 
-        Objects.CreateShrapnel(World, _gameWorldBatch, new Vector2(50, 50), new Vector2(5, 5));
+        Objects.CreateShrapnel(World, _gameWorldBatch, new Vector2(50, 50), Vector2.Zero);
+        Objects.CreateStaticPlanet(World, _gameWorldBatch, 50_000f);
     }
 
     public void Update(GameTime time)
     {
         float dt = (float)time.ElapsedGameTime.TotalSeconds;
         for (int i = 0; i < Consts.SubStep; i++)
+        {
+            GravitySystem.Update(World, Consts.G);
             NewtonianPhysicSystem.Update(World, dt / Consts.SubStep);
+        }
     }
 
     public void Draw()
