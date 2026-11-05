@@ -28,3 +28,8 @@ public record struct CMass
 }
 
 public record struct CGravitySource();
+
+public record struct CRotation(float Rot);
+public record struct CAngularVelocity(float AngVel);
+public record struct CTorque(float Torq);
+public record struct CInertia(float InvInertia);
