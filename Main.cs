@@ -29,6 +29,7 @@ public class Main : Game
 
     protected override void LoadContent()
     {
+        AssetManager.Load(Content, GraphicsDevice);
     }
 
     protected override void Update(GameTime gameTime)
