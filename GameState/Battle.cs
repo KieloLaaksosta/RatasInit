@@ -30,7 +30,7 @@ public sealed class Battle : IGameState
         _gameWorldBatch = new SpriteBatch(gd);
         _gameWorld = new RenderTarget2D(gd, Consts.WorldDrawSize, Consts.WorldDrawSize);
 
-        World.Create(new CBatch(_gameWorldBatch, 0f), new CSprite(AssetManager.Pixel, new Rectangle(0, 0, 1, 1), Color.White), new CTargetRectangle(new Rectangle(50, 50, 100, 100)));
+        Objects.CreateShrapnel(World, _gameWorldBatch, new Vector2(50, 50), new Vector2(5, 5));
     }
 
     public void Update(GameTime time)
