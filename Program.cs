@@ -1,2 +1,2 @@
-﻿using var game = new RatasInit.Game1();
+﻿using var game = new RatasInit.Main();
 game.Run();
