@@ -1,7 +1,9 @@
 using Arch.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RatasInit.Components;
 using RatasInit.Managers;
+using RatasInit.Systems;
 
 namespace RatasInit.GameStates;
 
@@ -27,6 +29,8 @@ public sealed class Battle : IGameState
 
         _gameWorldBatch = new SpriteBatch(gd);
         _gameWorld = new RenderTarget2D(gd, Consts.WorldDrawSize, Consts.WorldDrawSize);
+
+        World.Create(new CBatch(_gameWorldBatch, 0f), new CSprite(AssetManager.Pixel, new Rectangle(0, 0, 1, 1), Color.White), new CTargetRectangle(new Rectangle(50, 50, 100, 100)));
     }
 
     public void Update(GameTime time)
@@ -38,7 +42,9 @@ public sealed class Battle : IGameState
     {
         _gd.SetRenderTarget(_gameWorld);
         _gameWorldBatch.Begin(samplerState: SamplerState.PointClamp);
-        _gameWorldBatch.Draw(AssetManager.Pixel, new Rectangle(50, 50, 100, 100), Color.White);
+
+        DrawingSystem.Draw(World);
+
         _gameWorldBatch.End();
 
         _gd.SetRenderTarget(ScreenManager.FinalTarget);
