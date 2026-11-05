@@ -26,7 +26,6 @@ public class Main : Game
     protected override void Initialize()
     {
         base.Initialize();
-        ScreenManager.Initialize(GraphicsDevice);
 
         _gameState = new Battle();
         _gameState.Load(Window, GraphicsDevice, _graphics);
@@ -35,6 +34,7 @@ public class Main : Game
     protected override void LoadContent()
     {
         AssetManager.Load(Content, GraphicsDevice);
+        ScreenManager.Initialize(GraphicsDevice);
     }
 
     protected override void Update(GameTime gameTime)
