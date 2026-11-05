@@ -27,6 +27,9 @@ public class Main : Game
     {
         base.Initialize();
         ScreenManager.Initialize(GraphicsDevice);
+
+        _gameState = new Battle();
+        _gameState.Load(Window, GraphicsDevice, _graphics);
     }
 
     protected override void LoadContent()
