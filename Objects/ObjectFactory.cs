@@ -35,4 +35,25 @@ public static class ObjectFactory
         );
         return entity;
     }
+
+    public static Entity CreatePlayer(World world, SpriteBatch batch, Vector2 pos)
+    {
+        var entity = world.Create(
+            new CPosition(pos),
+            new CMass(1f),
+            new CVelocity(Vector2.Zero),
+            new CForce(),
+
+            new CRotation(0),
+            new CInertia(1f),
+            new CAngularVelocity(0),
+            new CTorque(),
+
+            new CPlayer(100f, 100f, 1f),
+
+            new CBatch(batch, 0f),
+            new CSprite(AssetManager.Pixel, new Rectangle(0, 0, 1, 1), Color.Green)
+        );
+        return entity;
+    }
 }

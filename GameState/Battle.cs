@@ -1,8 +1,9 @@
 using Arch.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RatasInit.Objects;
+using RatasInit.Components;
 using RatasInit.Managers;
+using RatasInit.Objects;
 using RatasInit.Systems;
 
 namespace RatasInit.GameStates;
@@ -14,6 +15,8 @@ public sealed class Battle : IGameState
 
     private RenderTarget2D _gameWorld;
     private SpriteBatch _gameWorldBatch;
+
+    private Entity _player;
 
     public void Dispose()
     {
@@ -31,6 +34,8 @@ public sealed class Battle : IGameState
         _gameWorld = new RenderTarget2D(gd, Consts.WorldDrawSize, Consts.WorldDrawSize);
 
         ObjectFactory.CreateShrapnel(World, _gameWorldBatch, new Vector2(50, 50), Vector2.Zero);
+        _player = ObjectFactory.CreatePlayer(World, _gameWorldBatch, new Vector2(250, 50));
+
         ObjectFactory.CreateStaticPlanet(World, _gameWorldBatch, 50_000f);
     }
 
@@ -39,8 +44,11 @@ public sealed class Battle : IGameState
         float dt = (float)time.ElapsedGameTime.TotalSeconds;
         for (int i = 0; i < Consts.SubStep; i++)
         {
+            float sub_dt = dt / Consts.SubStep;
+
             GravitySystem.Update(World, Consts.G);
-            NewtonianPhysicSystem.Update(World, dt / Consts.SubStep);
+            Player.Update(_player, sub_dt);
+            NewtonianPhysicSystem.Update(World, sub_dt);
         }
     }
 
