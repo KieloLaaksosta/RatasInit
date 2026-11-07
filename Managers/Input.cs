@@ -6,6 +6,11 @@ namespace RatasInit.Managers;
 
 public enum InputCode
 {
+    Forward,
+    Backward,
+
+    Clockwise,
+    CounterClockwise
 }
 
 public enum InputType : byte
