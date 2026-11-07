@@ -40,6 +40,7 @@ public class Main : Game
     protected override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        InputManager.Update();
         _gameState.Update(gameTime);
     }
 

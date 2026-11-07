@@ -19,32 +19,7 @@ public static class InputManager
     private static readonly HashSet<InputCode> _releasedInputCodes = [];
     private static readonly HashSet<InputCode> _prevHeldInputCodes = [];
 
-    private static EventHandler<TextInputEventArgs> _textInputDelegate;
-    private static GameWindow _window;
     private static int _prevScroll;
-
-    public static void Initialize(GameWindow window)
-    {
-        _window = window;
-    }
-
-    public static void SubscribeToTextWriter(EventHandler<TextInputEventArgs> func)
-    {
-        if (_textInputDelegate == null && _window != null)
-        {
-            _window.TextInput += func;
-            _textInputDelegate = func;
-        }
-    }
-
-    public static void ClearTextWriterSubscription()
-    {
-        if (_window != null && _textInputDelegate != null)
-        {
-            _window.TextInput -= _textInputDelegate;
-            _textInputDelegate = null;
-        }
-    }
 
     public static void Update()
     {
