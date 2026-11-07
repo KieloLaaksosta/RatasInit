@@ -7,19 +7,17 @@ namespace RatasInit.Managers;
 
 public static class InputManager
 {
-    // Backing hash sets
+    public static bool IsHeld(InputCode code) => _heldInputCodes.Contains(code);
+    public static bool IsPressed(InputCode code) => _pressedInputCodes.Contains(code);
+    public static bool IsReleased(InputCode code) => _releasedInputCodes.Contains(code);
+
+    public static KeyBindings KeyBindings { get; set; }
+    public static Action<Input> OnAny { get; set; }
+
     private static readonly HashSet<InputCode> _heldInputCodes = [];
     private static readonly HashSet<InputCode> _pressedInputCodes = [];
     private static readonly HashSet<InputCode> _releasedInputCodes = [];
     private static readonly HashSet<InputCode> _prevHeldInputCodes = [];
-
-    // Public read-only exposed sets queried by InputCode
-    public static IReadOnlySet<InputCode> HeldInputCodes => _heldInputCodes;
-    public static IReadOnlySet<InputCode> PressedInputCodes => _pressedInputCodes;
-    public static IReadOnlySet<InputCode> ReleasedInputCodes => _releasedInputCodes;
-
-    public static KeyBindings KeyBindings { get; set; }
-    public static Action<Input> OnAny { get; set; }
 
     private static EventHandler<TextInputEventArgs> _textInputDelegate;
     private static GameWindow _window;
@@ -78,9 +76,9 @@ public static class InputManager
         var padState = GamePad.GetState(0, GamePadDeadZone.None);
         if (padState.IsConnected && KeyBindings != null)
         {
-            if (padState.Triggers.Left > KeyBindings.TriggersTreshold) 
+            if (padState.Triggers.Left > KeyBindings.TriggersTreshold)
                 AddInputToSet(new Input(AdditionalGamePadButtons.LeftTrigger), _heldInputCodes);
-            if (padState.Triggers.Right > KeyBindings.TriggersTreshold) 
+            if (padState.Triggers.Right > KeyBindings.TriggersTreshold)
                 AddInputToSet(new Input(AdditionalGamePadButtons.RightTrigger), _heldInputCodes);
 
             var buttons = padState.Buttons;
@@ -148,9 +146,4 @@ public static class InputManager
             else if (stick.Y < -threshold) AddInputToSet(new Input(down), targetSet);
         }
     }
-
-    // Convenience query helpers
-    public static bool IsHeld(InputCode code) => _heldInputCodes.Contains(code);
-    public static bool IsPressed(InputCode code) => _pressedInputCodes.Contains(code);
-    public static bool IsReleased(InputCode code) => _releasedInputCodes.Contains(code);
 }
