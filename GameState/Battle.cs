@@ -1,7 +1,7 @@
 using Arch.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RatasInit.Components;
+using RatasInit.Objects;
 using RatasInit.Managers;
 using RatasInit.Systems;
 
@@ -30,8 +30,8 @@ public sealed class Battle : IGameState
         _gameWorldBatch = new SpriteBatch(gd);
         _gameWorld = new RenderTarget2D(gd, Consts.WorldDrawSize, Consts.WorldDrawSize);
 
-        Objects.CreateShrapnel(World, _gameWorldBatch, new Vector2(50, 50), Vector2.Zero);
-        Objects.CreateStaticPlanet(World, _gameWorldBatch, 50_000f);
+        ObjectFactory.CreateShrapnel(World, _gameWorldBatch, new Vector2(50, 50), Vector2.Zero);
+        ObjectFactory.CreateStaticPlanet(World, _gameWorldBatch, 50_000f);
     }
 
     public void Update(GameTime time)

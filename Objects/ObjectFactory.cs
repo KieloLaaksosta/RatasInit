@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 using RatasInit.Components;
 using RatasInit.Managers;
 
-namespace RatasInit;
+namespace RatasInit.Objects;
 
-public static class Objects
+public static class ObjectFactory
 {
     public static Entity CreateShrapnel(World world, SpriteBatch batch, Vector2 pos, Vector2 vel)
     {
