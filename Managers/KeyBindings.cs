@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 
 namespace RatasInit.Managers;
 
@@ -7,7 +8,12 @@ public class KeyBindings
 {
     public static KeyBindings DefaultBindings => new()
     {
-        Bindings = [],
+        Bindings = new Dictionary<Input, List<InputCode>>{
+            {new Input(Keys.W), [InputCode.Forward]},
+            {new Input(Keys.S), [InputCode.Backward]},
+            {new Input(Keys.D), [InputCode.Clockwise]},
+            {new Input(Keys.A), [InputCode.CounterClockwise]},
+        },
         SticksThreshold = 0.3f,
         TriggersTreshold = 0.15f
     };
@@ -24,7 +30,7 @@ public class KeyBindings
             if (!value.Contains(code))
                 value.Add(code);
         }
-        else 
+        else
         {
             Bindings.Add(input, [code]);
         }

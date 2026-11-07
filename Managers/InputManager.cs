@@ -11,7 +11,7 @@ public static class InputManager
     public static bool IsPressed(InputCode code) => _pressedInputCodes.Contains(code);
     public static bool IsReleased(InputCode code) => _releasedInputCodes.Contains(code);
 
-    public static KeyBindings KeyBindings { get; set; }
+    public static KeyBindings KeyBindings { get; set; } = KeyBindings.DefaultBindings;
     public static Action<Input> OnAny { get; set; }
 
     private static readonly HashSet<InputCode> _heldInputCodes = [];
